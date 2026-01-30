@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base: Sky + Forest Light + Cosmic Rainbow */
+    --background: 45 33% 97%; /* Warm cream */
+    --foreground: 220 15% 25%; /* Soft charcoal for readability */
+
+    /* Card/Panel: Cloud-glass style */
+    --card: 45 40% 98%;
+    --card-foreground: 220 15% 25%;
+
+    --popover: 45 40% 98%;
+    --popover-foreground: 220 15% 25%;
+
+    /* Primary: Soft sage green */
+    --primary: 150 25% 45%;
+    --primary-foreground: 45 33% 97%;
+
+    /* Secondary: Pale indigo/lavender */
+    --secondary: 250 30% 92%;
+    --secondary-foreground: 250 25% 35%;
+
+    /* Muted: Misty fog */
+    --muted: 210 20% 94%;
+    --muted-foreground: 220 10% 50%;
+
+    /* Accent: Aurora gold */
+    --accent: 38 60% 75%;
+    --accent-foreground: 38 50% 25%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 25% 88%;
+    --input: 210 25% 88%;
+    --ring: 150 25% 45%;
+
+    --radius: 1rem;
+
+    /* Custom tokens for this design */
+    --sky-light: 210 50% 96%;
+    --sage: 150 25% 85%;
+    --sage-deep: 150 30% 40%;
+    --lavender: 270 30% 92%;
+    --lavender-deep: 270 25% 70%;
+    --sand: 38 40% 90%;
+    --sand-warm: 38 50% 80%;
+    --pearl: 45 30% 95%;
+    --mist: 200 20% 95%;
+    --forest: 150 35% 30%;
+    --aurora-pink: 330 50% 85%;
+    --aurora-blue: 200 60% 85%;
+    --aurora-gold: 45 70% 85%;
+
+    /* Gradients */
+    --gradient-aurora: linear-gradient(135deg, hsl(var(--aurora-pink)), hsl(var(--lavender)), hsl(var(--aurora-blue)));
+    --gradient-sky: linear-gradient(180deg, hsl(var(--sky-light)), hsl(var(--pearl)));
+    --gradient-earth: linear-gradient(180deg, hsl(var(--sage)), hsl(var(--sand)));
+    --gradient-glass: linear-gradient(135deg, hsla(45, 40%, 98%, 0.8), hsla(210, 30%, 98%, 0.6));
+    --gradient-hero-overlay: linear-gradient(180deg, hsla(45, 33%, 97%, 0.1) 0%, hsla(45, 33%, 97%, 0.7) 70%, hsla(45, 33%, 97%, 1) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsla(220, 15%, 25%, 0.08);
+    --shadow-glow: 0 0 40px -10px hsla(150, 25%, 45%, 0.2);
+    --shadow-aurora: 0 0 30px -5px hsla(270, 30%, 70%, 0.3);
+
+    /* Sidebar (keeping defaults) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Keep light mode for this healing site - darkness is avoided per guidelines */
+    --background: 45 33% 97%;
+    --foreground: 220 15% 25%;
+    --card: 45 40% 98%;
+    --card-foreground: 220 15% 25%;
+    --popover: 45 40% 98%;
+    --popover-foreground: 220 15% 25%;
+    --primary: 150 25% 45%;
+    --primary-foreground: 45 33% 97%;
+    --secondary: 250 30% 92%;
+    --secondary-foreground: 250 25% 35%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 220 10% 50%;
+    --accent: 38 60% 75%;
+    --accent-foreground: 38 50% 25%;
+    --border: 210 25% 88%;
+    --input: 210 25% 88%;
+    --ring: 150 25% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Cloud-glass panel style */
+  .glass-panel {
+    @apply bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-md border border-white/50 shadow-soft rounded-2xl;
+  }
+
+  /* Aurora border glow effect */
+  .aurora-glow {
+    position: relative;
+  }
+  
+  .aurora-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-aurora);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+  
+  .aurora-glow:hover::before {
+    opacity: 0.6;
+  }
+
+  /* Floating animation for particles */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+
+  .float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  /* Gentle fade in */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Section divider - aurora mist band */
+  .aurora-divider {
+    height: 120px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsla(var(--aurora-pink), 0.1) 20%,
+      hsla(var(--lavender), 0.15) 50%,
+      hsla(var(--aurora-blue), 0.1) 80%,
+      transparent 100%
+    );
+  }
+
+  /* Soft text gradient */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--sage-deep)), hsl(var(--lavender-deep)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-aurora {
+    box-shadow: var(--shadow-aurora);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(3px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(30px) translateY(-20px);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
