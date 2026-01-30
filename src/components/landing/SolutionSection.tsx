@@ -1,34 +1,60 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const solutions = [
-  "Releasing stored tension (gently, not forcefully)",
-  "Balancing the nervous system",
-  "Returning from the mind into the body",
-  "Reconnecting with nature and inner guidance",
-  "Restoring your natural energy flow"
+  { text: "Releasing stored tension (gently, not forcefully)", color: "cosmic-rose" },
+  { text: "Balancing the nervous system", color: "cosmic-turquoise" },
+  { text: "Returning from the mind into the body", color: "cosmic-violet" },
+  { text: "Reconnecting with nature and inner guidance", color: "cosmic-gold" },
+  { text: "Restoring your natural energy flow", color: "cosmic-magenta" }
 ];
 
 const SolutionSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  return (
-    <section className="py-24 md:py-32 bg-gradient-earth relative overflow-hidden" ref={ref}>
-      {/* Decorative aurora band */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-aurora opacity-30" />
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto">
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+
+  return (
+    <section className="relative py-32 md:py-44 overflow-hidden" ref={containerRef}>
+      {/* Cosmic gradient background */}
+      <motion.div 
+        style={{ scale }}
+        className="absolute inset-0 bg-gradient-to-br from-cosmic-violet/5 via-transparent to-cosmic-turquoise/5"
+      />
+      
+      {/* Floating cosmic elements */}
+      <motion.div
+        animate={{ 
+          rotate: [0, 360],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/4 left-[5%] w-40 h-40"
+      >
+        <div className="absolute inset-0 border border-cosmic-gold/20 rounded-full" />
+        <div className="absolute inset-4 border border-cosmic-rose/15 rounded-full" />
+      </motion.div>
+
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 1 }}
+            className="text-center mb-20"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-4 font-light">
-              A Holistic Healing Experience
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 font-medium tracking-wide">
+              <span className="text-gradient">A Holistic Healing</span>
+              <br />
+              <span className="text-foreground">Experience</span>
             </h2>
             <p className="font-display text-xl md:text-2xl text-muted-foreground italic">
               Rooted in Earth & Cosmos
@@ -38,25 +64,34 @@ const SolutionSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center text-lg text-muted-foreground mb-12 font-light"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-center text-lg md:text-xl text-muted-foreground mb-16 font-body"
           >
             I combine sound healing and plant medicine traditions to support you in:
           </motion.p>
 
-          <div className="space-y-4 mb-16">
+          <div className="space-y-5 mb-20">
             {solutions.map((solution, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-pearl/50 backdrop-blur-sm"
+                initial={{ opacity: 0, x: -60, filter: "blur(8px)" }}
+                animate={isInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : { opacity: 0, x: -60, filter: "blur(8px)" }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.4 + index * 0.12,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                whileHover={{ x: 10, scale: 1.01 }}
+                className="glass-panel p-6 flex items-center gap-5 group"
               >
-                <div className="w-8 h-8 rounded-full bg-sage/50 flex items-center justify-center shrink-0">
-                  <span className="text-sage-deep text-lg">✦</span>
-                </div>
-                <p className="text-foreground font-light">{solution}</p>
+                <motion.div 
+                  className={`w-12 h-12 rounded-full bg-${solution.color}/20 flex items-center justify-center shrink-0 border border-${solution.color}/30`}
+                  whileHover={{ scale: 1.2, rotate: 180 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="text-foreground text-lg">✦</span>
+                </motion.div>
+                <p className="text-foreground font-body text-lg">{solution.text}</p>
               </motion.div>
             ))}
           </div>
@@ -64,16 +99,13 @@ const SolutionSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-center text-muted-foreground font-light italic"
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="text-center text-muted-foreground font-body italic text-lg"
           >
             Each session is personalized, slow, and held with deep respect for your boundaries and your pace.
           </motion.p>
         </div>
       </div>
-
-      {/* Decorative aurora band */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-aurora opacity-30" />
     </section>
   );
 };

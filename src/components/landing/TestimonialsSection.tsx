@@ -5,15 +5,18 @@ import { useRef } from "react";
 const testimonials = [
   {
     quote: "After my first session, I felt lighter than I had in years. My sleep improved, and I felt truly at peace.",
-    name: "Anna"
+    name: "Anna",
+    symbol: "✧"
   },
   {
     quote: "A deeply healing experience. I finally feel connected to myself again.",
-    name: "Maria"
+    name: "Maria",
+    symbol: "☽"
   },
   {
     quote: "Her work changed my life. Gentle, powerful, and full of love.",
-    name: "Sophia"
+    name: "Sophia",
+    symbol: "☆"
   }
 ];
 
@@ -22,37 +25,54 @@ const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 bg-background" ref={ref}>
+    <section className="relative py-32 md:py-44" ref={ref}>
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8 }}
-            className="font-display text-3xl md:text-4xl lg:text-5xl text-center mb-16 font-light"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 1 }}
+            className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide text-gradient"
           >
             Words from the Heart
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                className="glass-panel p-8 relative"
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.3 + index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                whileHover={{ y: -8 }}
+                className="glass-panel p-10 relative"
               >
-                {/* Quote mark */}
-                <span className="absolute -top-3 left-6 text-5xl text-sage/30 font-display">"</span>
+                {/* Cosmic quote mark */}
+                <motion.span 
+                  className="absolute -top-4 left-8 text-5xl text-gradient font-display"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 6, repeat: Infinity }}
+                >
+                  "
+                </motion.span>
                 
-                <p className="text-foreground font-light leading-relaxed mb-6 mt-2 italic">
+                <p className="text-foreground font-body leading-relaxed mb-8 mt-4 italic text-lg">
                   {testimonial.quote}
                 </p>
                 
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-sage-deep" />
-                  <span className="font-display text-muted-foreground">{testimonial.name}</span>
+                <div className="flex items-center gap-4">
+                  <motion.span 
+                    className="text-2xl text-cosmic-violet"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    {testimonial.symbol}
+                  </motion.span>
+                  <span className="font-display text-muted-foreground text-lg tracking-wide">{testimonial.name}</span>
                 </div>
               </motion.div>
             ))}

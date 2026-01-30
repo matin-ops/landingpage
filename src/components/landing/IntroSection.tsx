@@ -1,10 +1,18 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const IntroSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const paragraphs = [
     "You feel it.",
@@ -21,13 +29,22 @@ const IntroSection = () => {
   return (
     <section 
       id="journey" 
-      className="relative py-24 md:py-32 bg-gradient-sky"
-      ref={ref}
+      className="relative py-32 md:py-44"
+      ref={containerRef}
     >
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent" />
+      {/* Cosmic nebula background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          style={{ y }}
+          className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-cosmic-violet/10 blur-[100px]"
+        />
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]) }}
+          className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-cosmic-turquoise/8 blur-[80px]"
+        />
+      </div>
       
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-2xl mx-auto text-center">
           {paragraphs.map((text, index) => {
             const isShort = text.length < 30;
@@ -37,18 +54,18 @@ const IntroSection = () => {
             return (
               <motion.p
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 40, filter: "blur(10px)" }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  ease: "easeOut"
+                  duration: 1, 
+                  delay: index * 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94]
                 }}
                 className={`
-                  font-display leading-relaxed
-                  ${isShort ? 'text-2xl md:text-3xl font-light mb-4' : 'text-lg md:text-xl text-muted-foreground mb-6'}
+                  leading-relaxed
+                  ${isShort ? 'font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-wide mb-6' : 'font-body text-lg md:text-xl text-muted-foreground mb-8'}
                   ${isEmphasis ? 'text-foreground' : ''}
-                  ${isLast ? 'text-xl md:text-2xl italic text-sage-deep mt-8' : ''}
+                  ${isLast ? 'text-xl md:text-2xl italic text-gradient mt-12 font-display' : ''}
                 `}
               >
                 {text}
@@ -57,9 +74,6 @@ const IntroSection = () => {
           })}
         </div>
       </div>
-
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
