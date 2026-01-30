@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-rainbow-mountains.jpg";
+import heroImage from "@/assets/hero-cosmic-rainbow.jpg";
 
 const FloatingParticle = ({ delay, className, color }: { delay: number; className?: string; color?: string }) => (
   <motion.div
