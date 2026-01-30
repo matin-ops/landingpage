@@ -6,68 +6,87 @@
 
 @layer base {
   :root {
-    /* Base: Sky + Forest Light + Cosmic Rainbow */
-    --background: 45 33% 97%; /* Warm cream */
-    --foreground: 220 15% 25%; /* Soft charcoal for readability */
+    /* Base: Cosmic Light with Rainbow Energy */
+    --background: 280 20% 98%; /* Soft cosmic cream with violet undertone */
+    --foreground: 280 30% 20%; /* Deep cosmic purple for readability */
 
-    /* Card/Panel: Cloud-glass style */
-    --card: 45 40% 98%;
-    --card-foreground: 220 15% 25%;
+    /* Card/Panel: Ethereal glass style */
+    --card: 300 25% 98%;
+    --card-foreground: 280 30% 20%;
 
-    --popover: 45 40% 98%;
-    --popover-foreground: 220 15% 25%;
+    --popover: 300 25% 98%;
+    --popover-foreground: 280 30% 20%;
 
-    /* Primary: Soft sage green */
-    --primary: 150 25% 45%;
-    --primary-foreground: 45 33% 97%;
+    /* Primary: Vibrant cosmic magenta */
+    --primary: 320 70% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Pale indigo/lavender */
-    --secondary: 250 30% 92%;
-    --secondary-foreground: 250 25% 35%;
+    /* Secondary: Cosmic violet */
+    --secondary: 280 50% 92%;
+    --secondary-foreground: 280 40% 35%;
 
-    /* Muted: Misty fog */
-    --muted: 210 20% 94%;
-    --muted-foreground: 220 10% 50%;
+    /* Muted: Soft cosmic mist */
+    --muted: 270 25% 94%;
+    --muted-foreground: 280 20% 45%;
 
-    /* Accent: Aurora gold */
-    --accent: 38 60% 75%;
-    --accent-foreground: 38 50% 25%;
+    /* Accent: Rainbow gold */
+    --accent: 45 85% 65%;
+    --accent-foreground: 45 60% 20%;
 
-    --destructive: 0 60% 50%;
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
-    --ring: 150 25% 45%;
+    --border: 280 30% 88%;
+    --input: 280 30% 88%;
+    --ring: 320 70% 55%;
 
     --radius: 1rem;
 
-    /* Custom tokens for this design */
-    --sky-light: 210 50% 96%;
-    --sage: 150 25% 85%;
-    --sage-deep: 150 30% 40%;
-    --lavender: 270 30% 92%;
-    --lavender-deep: 270 25% 70%;
-    --sand: 38 40% 90%;
-    --sand-warm: 38 50% 80%;
-    --pearl: 45 30% 95%;
-    --mist: 200 20% 95%;
-    --forest: 150 35% 30%;
-    --aurora-pink: 330 50% 85%;
-    --aurora-blue: 200 60% 85%;
-    --aurora-gold: 45 70% 85%;
+    /* Cosmic Rainbow Palette */
+    --cosmic-rose: 350 80% 75%;
+    --cosmic-coral: 15 85% 70%;
+    --cosmic-gold: 45 90% 65%;
+    --cosmic-lime: 85 60% 65%;
+    --cosmic-turquoise: 175 70% 55%;
+    --cosmic-sky: 200 80% 70%;
+    --cosmic-violet: 270 70% 70%;
+    --cosmic-magenta: 320 75% 65%;
+    --cosmic-lavender: 280 60% 80%;
+    
+    /* Earth tones from Rainbow Mountains */
+    --earth-terracotta: 15 50% 55%;
+    --earth-ochre: 38 55% 60%;
+    --earth-sage: 90 30% 55%;
+    --earth-slate: 200 20% 50%;
+    
+    /* Legacy tokens (updated) */
+    --sky-light: 270 40% 96%;
+    --sage: 90 30% 85%;
+    --sage-deep: 320 50% 45%;
+    --lavender: 280 50% 92%;
+    --lavender-deep: 280 45% 65%;
+    --sand: 45 50% 88%;
+    --sand-warm: 38 60% 75%;
+    --pearl: 290 25% 96%;
+    --mist: 270 30% 95%;
+    --forest: 280 40% 35%;
+    --aurora-pink: 340 70% 80%;
+    --aurora-blue: 200 75% 75%;
+    --aurora-gold: 45 85% 75%;
 
-    /* Gradients */
-    --gradient-aurora: linear-gradient(135deg, hsl(var(--aurora-pink)), hsl(var(--lavender)), hsl(var(--aurora-blue)));
+    /* Cosmic Gradients */
+    --gradient-aurora: linear-gradient(135deg, hsl(var(--cosmic-rose)), hsl(var(--cosmic-violet)), hsl(var(--cosmic-turquoise)));
+    --gradient-rainbow: linear-gradient(135deg, hsl(var(--cosmic-magenta)), hsl(var(--cosmic-violet)), hsl(var(--cosmic-sky)), hsl(var(--cosmic-turquoise)));
     --gradient-sky: linear-gradient(180deg, hsl(var(--sky-light)), hsl(var(--pearl)));
-    --gradient-earth: linear-gradient(180deg, hsl(var(--sage)), hsl(var(--sand)));
-    --gradient-glass: linear-gradient(135deg, hsla(45, 40%, 98%, 0.8), hsla(210, 30%, 98%, 0.6));
-    --gradient-hero-overlay: linear-gradient(180deg, hsla(45, 33%, 97%, 0.1) 0%, hsla(45, 33%, 97%, 0.7) 70%, hsla(45, 33%, 97%, 1) 100%);
+    --gradient-earth: linear-gradient(180deg, hsl(var(--cosmic-gold) / 0.3), hsl(var(--cosmic-rose) / 0.2));
+    --gradient-glass: linear-gradient(135deg, hsla(280, 40%, 98%, 0.85), hsla(320, 30%, 98%, 0.7));
+    --gradient-hero-overlay: linear-gradient(180deg, hsla(280, 20%, 98%, 0.05) 0%, hsla(280, 20%, 98%, 0.6) 60%, hsla(280, 20%, 98%, 1) 100%);
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsla(220, 15%, 25%, 0.08);
-    --shadow-glow: 0 0 40px -10px hsla(150, 25%, 45%, 0.2);
-    --shadow-aurora: 0 0 30px -5px hsla(270, 30%, 70%, 0.3);
+    /* Cosmic Shadows */
+    --shadow-soft: 0 4px 20px -4px hsla(280, 30%, 25%, 0.1);
+    --shadow-glow: 0 0 40px -10px hsla(320, 70%, 55%, 0.25);
+    --shadow-aurora: 0 0 30px -5px hsla(280, 50%, 60%, 0.35);
+    --shadow-rainbow: 0 0 50px -10px hsla(320, 60%, 60%, 0.3), 0 0 80px -20px hsla(200, 70%, 60%, 0.2);
 
     /* Sidebar (keeping defaults) */
     --sidebar-background: 0 0% 98%;
@@ -81,24 +100,24 @@
   }
 
   .dark {
-    /* Keep light mode for this healing site - darkness is avoided per guidelines */
-    --background: 45 33% 97%;
-    --foreground: 220 15% 25%;
-    --card: 45 40% 98%;
-    --card-foreground: 220 15% 25%;
-    --popover: 45 40% 98%;
-    --popover-foreground: 220 15% 25%;
-    --primary: 150 25% 45%;
-    --primary-foreground: 45 33% 97%;
-    --secondary: 250 30% 92%;
-    --secondary-foreground: 250 25% 35%;
-    --muted: 210 20% 94%;
-    --muted-foreground: 220 10% 50%;
-    --accent: 38 60% 75%;
-    --accent-foreground: 38 50% 25%;
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
-    --ring: 150 25% 45%;
+    /* Keep cosmic light mode */
+    --background: 280 20% 98%;
+    --foreground: 280 30% 20%;
+    --card: 300 25% 98%;
+    --card-foreground: 280 30% 20%;
+    --popover: 300 25% 98%;
+    --popover-foreground: 280 30% 20%;
+    --primary: 320 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 280 50% 92%;
+    --secondary-foreground: 280 40% 35%;
+    --muted: 270 25% 94%;
+    --muted-foreground: 280 20% 45%;
+    --accent: 45 85% 65%;
+    --accent-foreground: 45 60% 20%;
+    --border: 280 30% 88%;
+    --input: 280 30% 88%;
+    --ring: 320 70% 55%;
   }
 }
 
@@ -178,12 +197,26 @@
     );
   }
 
-  /* Soft text gradient */
+  /* Cosmic rainbow text gradient */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--sage-deep)), hsl(var(--lavender-deep)));
+    background: linear-gradient(135deg, hsl(var(--cosmic-magenta)), hsl(var(--cosmic-violet)), hsl(var(--cosmic-turquoise)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Rainbow shimmer effect */
+  .rainbow-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--cosmic-rose)),
+      hsl(var(--cosmic-gold)),
+      hsl(var(--cosmic-turquoise)),
+      hsl(var(--cosmic-violet)),
+      hsl(var(--cosmic-rose))
+    );
+    background-size: 300% 100%;
+    animation: shimmer 4s ease-in-out infinite;
   }
 }
 

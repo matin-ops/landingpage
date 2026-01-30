@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-forest.jpg";
+import heroImage from "@/assets/hero-rainbow-mountains.jpg";
 
-const FloatingParticle = ({ delay, className }: { delay: number; className?: string }) => (
+const FloatingParticle = ({ delay, className, color }: { delay: number; className?: string; color?: string }) => (
   <motion.div
-    className={`absolute w-2 h-2 rounded-full bg-aurora-gold/40 ${className}`}
+    className={`absolute w-3 h-3 rounded-full ${color || 'bg-cosmic-gold/60'} ${className}`}
     initial={{ opacity: 0, y: 0 }}
     animate={{ 
-      opacity: [0, 0.6, 0],
-      y: [-20, -60, -100],
-      x: [0, 10, -5, 15]
+      opacity: [0, 0.8, 0],
+      y: [-20, -80, -140],
+      x: [0, 15, -10, 20]
     }}
     transition={{
-      duration: 8,
+      duration: 6,
       delay,
       repeat: Infinity,
       ease: "easeInOut"
@@ -34,13 +34,15 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-hero-overlay" />
       </div>
 
-      {/* Floating particles */}
+      {/* Floating rainbow particles */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <FloatingParticle delay={0} className="left-[10%] bottom-[20%]" />
-        <FloatingParticle delay={1.5} className="left-[25%] bottom-[30%]" />
-        <FloatingParticle delay={3} className="left-[60%] bottom-[25%]" />
-        <FloatingParticle delay={4.5} className="left-[80%] bottom-[35%]" />
-        <FloatingParticle delay={2} className="left-[45%] bottom-[15%]" />
+        <FloatingParticle delay={0} className="left-[10%] bottom-[20%]" color="bg-cosmic-magenta/50" />
+        <FloatingParticle delay={1.5} className="left-[25%] bottom-[30%]" color="bg-cosmic-violet/50" />
+        <FloatingParticle delay={3} className="left-[60%] bottom-[25%]" color="bg-cosmic-gold/50" />
+        <FloatingParticle delay={4.5} className="left-[80%] bottom-[35%]" color="bg-cosmic-turquoise/50" />
+        <FloatingParticle delay={2} className="left-[45%] bottom-[15%]" color="bg-cosmic-coral/50" />
+        <FloatingParticle delay={0.5} className="left-[75%] bottom-[18%]" color="bg-cosmic-rose/50" />
+        <FloatingParticle delay={2.5} className="left-[35%] bottom-[40%]" color="bg-cosmic-lavender/50" />
       </div>
 
       {/* Content */}
