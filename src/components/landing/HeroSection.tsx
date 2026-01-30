@@ -1,107 +1,134 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-cosmic-rainbow.jpg";
 
-const FloatingParticle = ({ delay, className, color }: { delay: number; className?: string; color?: string }) => (
-  <motion.div
-    className={`absolute w-3 h-3 rounded-full ${color || 'bg-cosmic-gold/60'} ${className}`}
-    initial={{ opacity: 0, y: 0 }}
-    animate={{ 
-      opacity: [0, 0.8, 0],
-      y: [-20, -80, -140],
-      x: [0, 15, -10, 20]
-    }}
-    transition={{
-      duration: 6,
-      delay,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }}
-  />
-);
+const FloatingParticle = ({ delay, className, size = "small" }: { delay: number; className?: string; size?: "small" | "medium" | "large" }) => {
+  const sizeClasses = {
+    small: "w-2 h-2",
+    medium: "w-3 h-3",
+    large: "w-4 h-4"
+  };
+
+  return (
+    <motion.div
+      className={`absolute rounded-full ${sizeClasses[size]} ${className}`}
+      initial={{ opacity: 0, y: 0 }}
+      animate={{ 
+        opacity: [0, 0.8, 0.4, 0.8, 0],
+        y: [-20, -100, -180],
+        x: [0, 20, -15, 25, 0],
+        scale: [0.5, 1, 0.8, 1, 0.5]
+      }}
+      transition={{
+        duration: 10,
+        delay,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  );
+};
 
 const HeroSection = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with parallax */}
+      <motion.div style={{ y, scale }} className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
-          alt="Sacred forest clearing at dawn" 
+          alt="Cosmic rainbow healing landscape" 
           className="w-full h-full object-cover"
         />
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-hero-overlay" />
-      </div>
+        
+        {/* Additional cosmic overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-cosmic-violet/10" />
+      </motion.div>
 
-      {/* Floating rainbow particles */}
+      {/* Floating cosmic particles */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <FloatingParticle delay={0} className="left-[10%] bottom-[20%]" color="bg-cosmic-magenta/50" />
-        <FloatingParticle delay={1.5} className="left-[25%] bottom-[30%]" color="bg-cosmic-violet/50" />
-        <FloatingParticle delay={3} className="left-[60%] bottom-[25%]" color="bg-cosmic-gold/50" />
-        <FloatingParticle delay={4.5} className="left-[80%] bottom-[35%]" color="bg-cosmic-turquoise/50" />
-        <FloatingParticle delay={2} className="left-[45%] bottom-[15%]" color="bg-cosmic-coral/50" />
-        <FloatingParticle delay={0.5} className="left-[75%] bottom-[18%]" color="bg-cosmic-rose/50" />
-        <FloatingParticle delay={2.5} className="left-[35%] bottom-[40%]" color="bg-cosmic-lavender/50" />
+        <FloatingParticle delay={0} className="left-[8%] bottom-[25%] bg-cosmic-magenta/60" size="medium" />
+        <FloatingParticle delay={1.5} className="left-[22%] bottom-[35%] bg-cosmic-violet/50" size="small" />
+        <FloatingParticle delay={3} className="left-[55%] bottom-[20%] bg-cosmic-gold/60" size="large" />
+        <FloatingParticle delay={4.5} className="left-[78%] bottom-[40%] bg-cosmic-turquoise/50" size="medium" />
+        <FloatingParticle delay={2} className="left-[42%] bottom-[15%] bg-cosmic-coral/50" size="small" />
+        <FloatingParticle delay={0.5} className="left-[68%] bottom-[22%] bg-cosmic-rose/60" size="medium" />
+        <FloatingParticle delay={2.5} className="left-[32%] bottom-[45%] bg-cosmic-lavender/50" size="large" />
+        <FloatingParticle delay={5} className="left-[85%] bottom-[30%] bg-cosmic-sky/50" size="small" />
+        <FloatingParticle delay={3.5} className="left-[12%] bottom-[50%] bg-cosmic-gold/40" size="medium" />
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 text-center">
+      <motion.div style={{ opacity }} className="relative z-20 container mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="max-w-5xl mx-auto"
         >
           <motion.h1 
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light leading-tight mb-8 text-foreground"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-tight mb-10 tracking-wide"
+            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, delay: 0.3 }}
           >
-            Reconnect With Your{" "}
+            <span className="text-foreground">Reconnect With Your</span>{" "}
+            <br className="hidden md:block" />
             <span className="text-gradient italic">Inner Balance</span>{" "}
-            Through Sound & Plant Medicine
+            <br className="hidden lg:block" />
+            <span className="text-foreground">Through Sound & Plant Medicine</span>
           </motion.h1>
 
           <motion.p 
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 font-light leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-14 font-body leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.6 }}
           >
             A gentle, earth-to-cosmos healing journey to quiet the mind, soften the nervous system, 
             and guide you back into your body.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.9 }}
           >
             <Button variant="hero" size="xl" asChild>
               <a href="#journey">Enter the Journey</a>
             </Button>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 2 }}
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-sage-deep/30 flex items-start justify-center p-2"
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-8 h-14 rounded-full border-2 border-cosmic-violet/40 flex items-start justify-center p-2"
         >
           <motion.div 
-            className="w-1.5 h-1.5 rounded-full bg-sage-deep/50"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-2 h-2 rounded-full bg-cosmic-violet/60"
+            animate={{ y: [0, 20, 0], opacity: [1, 0.5, 1] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
       </motion.div>
