@@ -61,7 +61,25 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Custom colors for this design
+        // Cosmic Rainbow Palette
+        cosmic: {
+          rose: "hsl(var(--cosmic-rose))",
+          coral: "hsl(var(--cosmic-coral))",
+          gold: "hsl(var(--cosmic-gold))",
+          lime: "hsl(var(--cosmic-lime))",
+          turquoise: "hsl(var(--cosmic-turquoise))",
+          sky: "hsl(var(--cosmic-sky))",
+          violet: "hsl(var(--cosmic-violet))",
+          magenta: "hsl(var(--cosmic-magenta))",
+          lavender: "hsl(var(--cosmic-lavender))",
+        },
+        earth: {
+          terracotta: "hsl(var(--earth-terracotta))",
+          ochre: "hsl(var(--earth-ochre))",
+          sage: "hsl(var(--earth-sage))",
+          slate: "hsl(var(--earth-slate))",
+        },
+        // Legacy tokens
         sky: {
           light: "hsl(var(--sky-light))",
         },
@@ -100,6 +118,7 @@ export default {
       },
       backgroundImage: {
         'gradient-aurora': 'var(--gradient-aurora)',
+        'gradient-rainbow': 'var(--gradient-rainbow)',
         'gradient-sky': 'var(--gradient-sky)',
         'gradient-earth': 'var(--gradient-earth)',
         'gradient-glass': 'var(--gradient-glass)',
