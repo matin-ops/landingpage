@@ -45,7 +45,7 @@ const BenefitsSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 1 }}
-            className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide text-gradient"
+            className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide text-cosmic-violet"
           >
             What You May Experience
           </motion.h2>
@@ -65,7 +65,7 @@ const BenefitsSection = () => {
                 className="glass-panel p-8 text-center group"
               >
                 <motion.span 
-                  className="text-4xl block mb-6 text-gradient"
+                  className="text-4xl block mb-6 text-cosmic-violet"
                   animate={{ 
                     rotate: [0, 5, -5, 0],
                     scale: [1, 1.1, 1]

@@ -37,7 +37,7 @@ const StepsSection = () => {
             transition={{ duration: 1 }}
             className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-24 font-medium tracking-wide"
           >
-            <span className="text-gradient">Your Healing Journey</span>
+            <span className="text-cosmic-violet">Your Healing Journey</span>
             <br />
             <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">in 3 Simple Steps</span>
           </motion.h2>
@@ -69,7 +69,7 @@ const StepsSection = () => {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-24 h-24 rounded-full glass-panel flex items-center justify-center mx-auto mb-8 relative"
                 >
-                  <span className="font-display text-3xl text-gradient font-medium">{step.number}</span>
+                  <span className="font-display text-3xl text-cosmic-violet font-medium">{step.number}</span>
                   <motion.span 
                     className="absolute -top-2 -right-2 text-2xl text-cosmic-gold"
                     animate={{ rotate: [0, 360] }}
@@ -91,7 +91,7 @@ const StepsSection = () => {
             transition={{ duration: 1, delay: 1.2 }}
             className="text-center space-y-3"
           >
-            <p className="font-display text-2xl text-gradient italic">No pressure. No rush.</p>
+            <p className="font-display text-2xl text-cosmic-violet italic">No pressure. No rush.</p>
             <p className="text-muted-foreground font-body text-lg">Only presence and care.</p>
           </motion.div>
         </div>

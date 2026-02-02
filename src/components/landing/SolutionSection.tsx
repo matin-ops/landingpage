@@ -52,7 +52,7 @@ const SolutionSection = () => {
             className="text-center mb-20"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 font-medium tracking-wide">
-              <span className="text-gradient">A Holistic Healing</span>
+              <span className="text-cosmic-violet">A Holistic Healing</span>
               <br />
               <span className="text-foreground">Experience</span>
             </h2>

@@ -65,7 +65,7 @@ const IntroSection = () => {
                   leading-relaxed
                   ${isShort ? 'font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-wide mb-6' : 'font-body text-lg md:text-xl text-muted-foreground mb-8'}
                   ${isEmphasis ? 'text-foreground' : ''}
-                  ${isLast ? 'text-xl md:text-2xl italic text-gradient mt-12 font-display' : ''}
+                  ${isLast ? 'text-xl md:text-2xl italic text-cosmic-violet mt-12 font-display' : ''}
                 `}
               >
                 {text}
