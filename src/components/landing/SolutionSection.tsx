@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const solutions = [
   { text: "Releasing stored tension (gently, not forcefully)", color: "cosmic-rose" },
@@ -24,24 +25,7 @@ const SolutionSection = () => {
 
   return (
     <section className="relative py-32 md:py-44 overflow-hidden" ref={containerRef}>
-      {/* Cosmic gradient background */}
-      <motion.div 
-        style={{ scale }}
-        className="absolute inset-0 bg-gradient-to-br from-cosmic-violet/5 via-transparent to-cosmic-turquoise/5"
-      />
-      
-      {/* Floating cosmic elements */}
-      <motion.div
-        animate={{ 
-          rotate: [0, 360],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 left-[5%] w-40 h-40"
-      >
-        <div className="absolute inset-0 border border-cosmic-gold/20 rounded-full" />
-        <div className="absolute inset-4 border border-cosmic-rose/15 rounded-full" />
-      </motion.div>
+      <CosmicBackground intensity="medium" />
 
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-4xl mx-auto">

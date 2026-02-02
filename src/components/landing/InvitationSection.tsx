@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
+import CosmicBackground from "./CosmicBackground";
 
 const InvitationSection = () => {
   const ref = useRef(null);
@@ -17,35 +18,7 @@ const InvitationSection = () => {
 
   return (
     <section className="relative py-32 md:py-44 overflow-hidden" ref={containerRef}>
-      {/* Cosmic floating orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          style={{ y }}
-          animate={{ 
-            x: [0, 40, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-[10%] w-48 h-48 rounded-full bg-cosmic-magenta/10 blur-[80px]"
-        />
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [-20, 20]) }}
-          animate={{ 
-            x: [0, -30, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-          className="absolute top-1/3 right-[15%] w-56 h-56 rounded-full bg-cosmic-turquoise/10 blur-[100px]"
-        />
-        <motion.div
-          animate={{ 
-            y: [0, -30, 0],
-            x: [0, 20, 0]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-          className="absolute bottom-1/4 left-1/3 w-40 h-40 rounded-full bg-cosmic-gold/10 blur-[60px]"
-        />
-      </div>
+      <CosmicBackground intensity="strong" />
 
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-4xl mx-auto text-center">

@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const practices = [
   { text: "Sacred sound frequencies", symbol: "◇" },
@@ -23,7 +24,8 @@ const AboutSection = () => {
 
   return (
     <section className="relative py-32 md:py-44" ref={containerRef}>
-      <div className="container mx-auto px-6" ref={ref}>
+      <CosmicBackground intensity="medium" />
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-16 items-center">
             {/* Cosmic mandala placeholder */}
