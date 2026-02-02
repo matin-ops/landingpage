@@ -71,24 +71,20 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <motion.div style={{ opacity }} className="relative z-20 container mx-auto px-6 text-center">
+      <motion.div style={{ opacity }} className="relative z-20 container mx-auto px-6 text-center pt-32 md:pt-40 lg:pt-48">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="max-w-5xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
           <motion.h1 
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-tight mb-10 tracking-wide"
-            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-relaxed mb-10 tracking-widest text-foreground"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.3 }}
           >
-            <span className="text-foreground">Reconnect With Your</span>{" "}
-            <br className="hidden md:block" />
-            <span className="text-gradient italic">Inner Balance</span>{" "}
-            <br className="hidden lg:block" />
-            <span className="text-foreground">Through Sound & Plant Medicine</span>
+            Sound & Plant Medicine Healing
           </motion.h1>
 
           <motion.p 

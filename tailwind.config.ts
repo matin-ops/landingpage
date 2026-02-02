@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Cinzel', 'Georgia', 'serif'],
+        display: ['Cinzel Decorative', 'Cinzel', 'Georgia', 'serif'],
         body: ['Philosopher', 'Georgia', 'serif'],
         accent: ['Quicksand', 'system-ui', 'sans-serif'],
       },
