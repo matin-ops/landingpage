@@ -7,21 +7,21 @@ interface CosmicBackgroundProps {
 }
 
 const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: CosmicBackgroundProps) => {
+  // Single consistent deep blue color for all sections
+  const cosmicBlue = "#0a0a1a";
+  
   const intensityConfig = {
     light: { 
-      bgOpacity: "from-[#0a0a20]/30 via-[#1a1a40]/20 to-[#0a0a20]/30",
-      flowerOpacity: 0.15,
-      starCount: 40
+      flowerOpacity: 0.35,
+      starCount: 50
     },
     medium: { 
-      bgOpacity: "from-[#0a0a20]/50 via-[#1a1a40]/40 to-[#0a0a20]/50",
-      flowerOpacity: 0.2,
-      starCount: 60
+      flowerOpacity: 0.45,
+      starCount: 70
     },
     strong: { 
-      bgOpacity: "from-[#0a0a20]/70 via-[#1a1a40]/60 to-[#0a0a20]/70",
-      flowerOpacity: 0.25,
-      starCount: 80
+      flowerOpacity: 0.55,
+      starCount: 90
     }
   };
 
@@ -33,7 +33,7 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
       id: i,
       left: `${(i * 17 + 7) % 100}%`,
       top: `${(i * 23 + 11) % 100}%`,
-      size: i % 3 === 0 ? 2 : 1,
+      size: i % 3 === 0 ? 2.5 : i % 2 === 0 ? 2 : 1.5,
       duration: 2 + (i % 4),
       delay: (i % 5) * 0.5
     }));
@@ -41,36 +41,31 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Deep cosmic blue sky gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-b ${config.bgOpacity}`} />
+      {/* Single solid cosmic blue background - consistent across all sections */}
+      <div 
+        className="absolute inset-0" 
+        style={{ backgroundColor: cosmicBlue }}
+      />
       
-      {/* Additional cosmic blue overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cosmic-violet/20 via-cosmic-sky/15 to-cosmic-turquoise/20" />
+      {/* Subtle cosmic glow overlays for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-cosmic-violet/8 via-transparent to-cosmic-violet/8" />
       
-      {/* Nebula clouds */}
+      {/* Soft nebula clouds */}
       <motion.div
         animate={{ 
           scale: [1, 1.05, 1],
-          opacity: [0.4, 0.6, 0.4]
+          opacity: [0.15, 0.25, 0.15]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-cosmic-violet/15 blur-[120px]"
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-cosmic-violet/20 blur-[150px]"
       />
       <motion.div
         animate={{ 
           scale: [1, 1.08, 1],
-          opacity: [0.3, 0.5, 0.3]
+          opacity: [0.1, 0.2, 0.1]
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-cosmic-turquoise/12 blur-[100px]"
-      />
-      <motion.div
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-cosmic-magenta/10 blur-[150px]"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-cosmic-turquoise/15 blur-[120px]"
       />
 
       {/* Twinkling stars */}
@@ -86,12 +81,12 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               height: star.size,
             }}
             animate={{
-              opacity: [0.4, 1, 0.4],
-              scale: [0.8, 1.3, 0.8],
+              opacity: [0.5, 1, 0.5],
+              scale: [0.8, 1.4, 0.8],
               boxShadow: [
-                "0 0 2px 0px rgba(255,255,255,0.5)",
-                "0 0 6px 2px rgba(255,255,255,0.8)",
-                "0 0 2px 0px rgba(255,255,255,0.5)"
+                "0 0 3px 1px rgba(255,255,255,0.6)",
+                "0 0 8px 3px rgba(255,255,255,0.9)",
+                "0 0 3px 1px rgba(255,255,255,0.6)"
               ]
             }}
             transition={{
@@ -104,27 +99,27 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
         ))}
       </div>
 
-      {/* Flower of Life - Sacred Geometry centered */}
+      {/* Flower of Life - Sacred Geometry - Large, clear and visible */}
       {showFlowerOfLife && (
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.svg
-            width="600"
-            height="600"
+            width="800"
+            height="800"
             viewBox="0 0 600 600"
-            className="w-[500px] h-[500px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px]"
+            className="w-[90vw] h-[90vw] max-w-[900px] max-h-[900px] md:w-[80vw] md:h-[80vw] lg:w-[70vw] lg:h-[70vw]"
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
             style={{ opacity: config.flowerOpacity }}
           >
             {/* Central circle */}
-            <circle cx="300" cy="300" r="50" fill="none" stroke="hsl(270, 70%, 70%)" strokeWidth="0.8" />
+            <circle cx="300" cy="300" r="50" fill="none" stroke="hsl(270, 80%, 75%)" strokeWidth="1.2" />
             
             {/* First ring of 6 circles */}
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
               const x = 300 + 50 * Math.cos((angle * Math.PI) / 180);
               const y = 300 + 50 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring1-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(270, 70%, 70%)" strokeWidth="0.7" />
+                <circle key={`ring1-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(270, 80%, 75%)" strokeWidth="1.1" />
               );
             })}
             
@@ -133,7 +128,7 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 300 + 86.6 * Math.cos((angle * Math.PI) / 180);
               const y = 300 + 86.6 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring2-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(175, 70%, 55%)" strokeWidth="0.6" />
+                <circle key={`ring2-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(200, 80%, 65%)" strokeWidth="1" />
               );
             })}
             
@@ -142,13 +137,22 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 300 + 130 * Math.cos((angle * Math.PI) / 180);
               const y = 300 + 130 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring3-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(320, 75%, 65%)" strokeWidth="0.5" />
+                <circle key={`ring3-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(320, 75%, 70%)" strokeWidth="0.9" />
               );
             })}
             
-            {/* Outer rings */}
-            <circle cx="300" cy="300" r="200" fill="none" stroke="hsl(45, 90%, 65%)" strokeWidth="0.4" />
-            <circle cx="300" cy="300" r="250" fill="none" stroke="hsl(270, 70%, 70%)" strokeWidth="0.3" />
+            {/* Fourth ring of 24 circles */}
+            {[0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330, 345].map((angle, i) => {
+              const x = 300 + 175 * Math.cos((angle * Math.PI) / 180);
+              const y = 300 + 175 * Math.sin((angle * Math.PI) / 180);
+              return (
+                <circle key={`ring4-${i}`} cx={x} cy={y} r="50" fill="none" stroke="hsl(45, 90%, 70%)" strokeWidth="0.8" />
+              );
+            })}
+            
+            {/* Outer decorative rings */}
+            <circle cx="300" cy="300" r="225" fill="none" stroke="hsl(270, 80%, 75%)" strokeWidth="0.7" />
+            <circle cx="300" cy="300" r="275" fill="none" stroke="hsl(200, 80%, 65%)" strokeWidth="0.5" />
           </motion.svg>
         </div>
       )}
