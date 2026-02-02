@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const IntroSection = () => {
   const ref = useRef(null);
@@ -32,17 +33,7 @@ const IntroSection = () => {
       className="relative py-32 md:py-44"
       ref={containerRef}
     >
-      {/* Cosmic nebula background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          style={{ y }}
-          className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-cosmic-violet/10 blur-[100px]"
-        />
-        <motion.div 
-          style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]) }}
-          className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-cosmic-turquoise/8 blur-[80px]"
-        />
-      </div>
+      <CosmicBackground intensity="light" />
       
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-2xl mx-auto text-center">

@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
+import CosmicBackground from "./CosmicBackground";
 
 const Footer = () => {
   return (
     <footer className="relative py-16 overflow-hidden">
-      {/* Cosmic gradient top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cosmic-violet/40 to-transparent" />
+      <CosmicBackground showFlowerOfLife={false} intensity="light" />
       
-      {/* Subtle nebula background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-violet/5 to-transparent" />
+      {/* Cosmic gradient top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cosmic-violet/40 to-transparent z-10" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">

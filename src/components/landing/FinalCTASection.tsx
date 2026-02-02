@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
+import CosmicBackground from "./CosmicBackground";
 
 const FinalCTASection = () => {
   const ref = useRef(null);
@@ -18,22 +19,7 @@ const FinalCTASection = () => {
 
   return (
     <section className="relative py-32 md:py-44 overflow-hidden" ref={containerRef}>
-      {/* Cosmic gradient background */}
-      <motion.div 
-        style={{ scale, opacity }}
-        className="absolute inset-0 bg-gradient-to-br from-cosmic-violet/10 via-cosmic-magenta/5 to-cosmic-turquoise/10"
-      />
-
-      {/* Animated cosmic ring */}
-      <motion.div
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20"
-      >
-        <div className="absolute inset-0 rounded-full border border-cosmic-violet/30" />
-        <div className="absolute inset-12 rounded-full border border-cosmic-magenta/20" />
-        <div className="absolute inset-24 rounded-full border border-cosmic-turquoise/30" />
-      </motion.div>
+      <CosmicBackground intensity="strong" />
 
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-3xl mx-auto text-center">

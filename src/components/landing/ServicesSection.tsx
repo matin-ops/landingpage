@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const services = [
   { icon: "◇", title: "Individual Sound Healing", color: "cosmic-violet" },
@@ -16,8 +17,7 @@ const ServicesSection = () => {
 
   return (
     <section className="relative py-32 md:py-44 overflow-hidden" ref={ref}>
-      {/* Cosmic gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cosmic-violet/5 via-transparent to-cosmic-magenta/5" />
+      <CosmicBackground intensity="strong" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">

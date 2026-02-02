@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const testimonials = [
   {
@@ -26,7 +27,8 @@ const TestimonialsSection = () => {
 
   return (
     <section className="relative py-32 md:py-44" ref={ref}>
-      <div className="container mx-auto px-6">
+      <CosmicBackground intensity="medium" />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}

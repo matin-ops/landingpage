@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const benefits = [
   { icon: "☽", text: "A calmer mind and quieter inner noise" },
@@ -17,29 +18,9 @@ const BenefitsSection = () => {
 
   return (
     <section className="relative py-32 md:py-44" ref={ref}>
-      {/* Subtle cosmic particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{ 
-              y: [0, -100, 0],
-              x: [0, Math.sin(i) * 50, 0],
-              opacity: [0, 0.6, 0]
-            }}
-            transition={{ 
-              duration: 8 + i * 2, 
-              repeat: Infinity, 
-              delay: i * 1.5,
-              ease: "easeInOut"
-            }}
-            className="absolute w-2 h-2 rounded-full bg-cosmic-gold/40"
-            style={{ left: `${15 + i * 15}%`, bottom: "10%" }}
-          />
-        ))}
-      </div>
+      <CosmicBackground intensity="light" />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}

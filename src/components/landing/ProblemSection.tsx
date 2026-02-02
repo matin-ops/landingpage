@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CosmicBackground from "./CosmicBackground";
 
 const problems = [
   { text: "Constant stress or emotional exhaustion", symbol: "◇" },
@@ -25,17 +26,9 @@ const ProblemSection = () => {
 
   return (
     <section className="relative py-32 md:py-44" ref={containerRef}>
-      {/* Floating cosmic orb */}
-      <motion.div 
-        style={{ rotate }}
-        className="absolute top-20 right-[10%] w-64 h-64 opacity-20"
-      >
-        <div className="absolute inset-0 rounded-full border border-cosmic-violet/30" />
-        <div className="absolute inset-4 rounded-full border border-cosmic-magenta/20" />
-        <div className="absolute inset-8 rounded-full border border-cosmic-turquoise/30" />
-      </motion.div>
+      <CosmicBackground intensity="medium" />
 
-      <div className="container mx-auto px-6" ref={ref}>
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
