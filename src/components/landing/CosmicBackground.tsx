@@ -39,79 +39,73 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Base gradient matching screenshot - soft violet to purple-pink */}
+      {/* Base gradient - soft pastel lilac to lavender blue */}
       <div 
         className="absolute inset-0"
         style={{
           background: `linear-gradient(
             180deg,
-            hsl(260, 25%, 18%) 0%,
-            hsl(265, 28%, 25%) 20%,
-            hsl(270, 30%, 32%) 40%,
-            hsl(280, 25%, 38%) 60%,
-            hsl(290, 22%, 42%) 80%,
-            hsl(300, 20%, 45%) 100%
+            hsl(270, 40%, 92%) 0%,
+            hsl(265, 45%, 90%) 20%,
+            hsl(255, 50%, 88%) 40%,
+            hsl(245, 55%, 86%) 60%,
+            hsl(240, 50%, 88%) 80%,
+            hsl(250, 45%, 90%) 100%
           )`
         }}
       />
       
-      {/* Subtle pink aurora glow at top - matching screenshot */}
+      {/* Soft aurora glow - pastel pink */}
       <div 
-        className="absolute top-0 left-0 right-0 h-[40%]"
+        className="absolute top-0 left-0 right-0 h-[60%]"
         style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, hsla(320, 40%, 60%, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 100% 60% at 50% 0%, hsla(300, 50%, 85%, 0.4) 0%, transparent 70%)',
         }}
       />
       
-      {/* Secondary aurora - softer pink-violet */}
+      {/* Secondary aurora - soft lavender */}
       <motion.div
         animate={{ 
-          opacity: [0.08, 0.15, 0.08],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 right-0 w-[70%] h-[50%]"
+        className="absolute top-0 right-0 w-[80%] h-[60%]"
         style={{
-          background: 'radial-gradient(ellipse at 70% 10%, hsla(300, 35%, 55%, 0.12) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 70% 20%, hsla(280, 60%, 88%, 0.5) 0%, transparent 60%)',
         }}
       />
       
-      {/* Bright star accent (like the one in the screenshot on the left) */}
+      {/* Gentle blue accent glow */}
       <motion.div
         animate={{ 
-          opacity: [0.6, 1, 0.6],
-          scale: [1, 1.2, 1]
+          opacity: [0.2, 0.4, 0.2],
         }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute"
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        className="absolute bottom-0 left-0 w-[70%] h-[50%]"
         style={{
-          left: '8%',
-          top: '15%',
-          width: 6,
-          height: 6,
-          backgroundColor: 'hsla(60, 30%, 95%, 0.95)',
-          borderRadius: '50%',
-          boxShadow: '0 0 15px 5px hsla(60, 40%, 90%, 0.5), 0 0 30px 10px hsla(60, 30%, 80%, 0.3)',
+          background: 'radial-gradient(ellipse at 30% 80%, hsla(220, 60%, 85%, 0.4) 0%, transparent 60%)',
         }}
       />
 
-      {/* Twinkling stars - small white dots matching screenshot */}
+      {/* Subtle floating light particles instead of stars */}
       <div className="absolute inset-0">
-        {stars.map((star) => (
+        {stars.slice(0, 40).map((star) => (
           <motion.div
             key={star.id}
             className="absolute rounded-full"
             style={{
               left: star.left,
               top: star.top,
-              width: star.size,
-              height: star.size,
-              backgroundColor: `hsla(0, 0%, 100%, ${star.opacity})`,
+              width: star.size * 1.5,
+              height: star.size * 1.5,
+              backgroundColor: `hsla(280, 40%, 75%, ${star.opacity * 0.4})`,
+              boxShadow: `0 0 ${star.size * 3}px ${star.size}px hsla(280, 50%, 80%, 0.3)`,
             }}
             animate={{
-              opacity: [star.opacity * 0.5, star.opacity, star.opacity * 0.5],
+              opacity: [star.opacity * 0.3, star.opacity * 0.6, star.opacity * 0.3],
             }}
             transition={{
-              duration: star.duration,
+              duration: star.duration + 2,
               repeat: Infinity,
               delay: star.delay,
               ease: "easeInOut"
@@ -133,14 +127,14 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
             style={{ opacity: config.flowerOpacity }}
           >
             {/* Central circle */}
-            <circle cx="450" cy="450" r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.7)" strokeWidth="1" />
+            <circle cx="450" cy="450" r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.35)" strokeWidth="1" />
             
             {/* First ring of 6 circles */}
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
               const x = 450 + 70 * Math.cos((angle * Math.PI) / 180);
               const y = 450 + 70 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring1-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.6)" strokeWidth="0.9" />
+                <circle key={`ring1-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.3)" strokeWidth="0.9" />
               );
             })}
             
@@ -149,7 +143,7 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 450 + 121 * Math.cos((angle * Math.PI) / 180);
               const y = 450 + 121 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring2-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.5)" strokeWidth="0.8" />
+                <circle key={`ring2-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.25)" strokeWidth="0.8" />
               );
             })}
             
@@ -158,7 +152,7 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 450 + 180 * Math.cos((angle * Math.PI) / 180);
               const y = 450 + 180 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring3-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.4)" strokeWidth="0.7" />
+                <circle key={`ring3-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.2)" strokeWidth="0.7" />
               );
             })}
             
@@ -167,7 +161,7 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 450 + 250 * Math.cos((angle * Math.PI) / 180);
               const y = 450 + 250 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring4-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.3)" strokeWidth="0.6" />
+                <circle key={`ring4-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.15)" strokeWidth="0.6" />
               );
             })}
             
@@ -176,13 +170,13 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               const x = 450 + 320 * Math.cos((angle * Math.PI) / 180);
               const y = 450 + 320 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring5-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.25)" strokeWidth="0.5" />
+                <circle key={`ring5-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(280, 40%, 65%, 0.12)" strokeWidth="0.5" />
               );
             })}
             
             {/* Outer boundary circles */}
-            <circle cx="450" cy="450" r="320" fill="none" stroke="hsla(45, 50%, 80%, 0.2)" strokeWidth="0.5" />
-            <circle cx="450" cy="450" r="390" fill="none" stroke="hsla(45, 50%, 80%, 0.15)" strokeWidth="0.4" />
+            <circle cx="450" cy="450" r="320" fill="none" stroke="hsla(280, 40%, 65%, 0.1)" strokeWidth="0.5" />
+            <circle cx="450" cy="450" r="390" fill="none" stroke="hsla(280, 40%, 65%, 0.08)" strokeWidth="0.4" />
           </motion.svg>
         </div>
       )}
