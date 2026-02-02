@@ -97,7 +97,7 @@ const AboutSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 1 }}
-                className="font-display text-3xl md:text-4xl lg:text-5xl mb-10 font-medium tracking-wide text-gradient"
+                className="font-display text-3xl md:text-4xl lg:text-5xl mb-10 font-medium tracking-wide text-cosmic-violet"
               >
                 Meet Your Healer
               </motion.h2>

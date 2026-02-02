@@ -55,7 +55,7 @@ const InvitationSection = () => {
             transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-10 font-medium tracking-wide"
           >
-            <span className="text-gradient">Begin Your Journey</span>
+            <span className="text-cosmic-violet">Begin Your Journey</span>
             <br />
             <span className="text-foreground">Back to Yourself</span>
           </motion.h2>

@@ -43,7 +43,7 @@ const FinalCTASection = () => {
             transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="space-y-6 mb-16"
           >
-            <p className="font-display text-3xl md:text-4xl lg:text-5xl text-gradient font-medium tracking-wide">
+            <p className="font-display text-3xl md:text-4xl lg:text-5xl text-cosmic-violet font-medium tracking-wide">
               Your body knows the way.
             </p>
             <p className="font-display text-xl md:text-2xl lg:text-3xl text-muted-foreground italic">

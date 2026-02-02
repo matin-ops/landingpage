@@ -32,7 +32,7 @@ const TestimonialsSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 1 }}
-            className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide text-gradient"
+            className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide text-cosmic-violet"
           >
             Words from the Heart
           </motion.h2>
@@ -53,7 +53,7 @@ const TestimonialsSection = () => {
               >
                 {/* Cosmic quote mark */}
                 <motion.span 
-                  className="absolute -top-4 left-8 text-5xl text-gradient font-display"
+                  className="absolute -top-4 left-8 text-5xl text-cosmic-violet font-display"
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 6, repeat: Infinity }}
                 >

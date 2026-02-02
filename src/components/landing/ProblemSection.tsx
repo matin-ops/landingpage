@@ -43,7 +43,7 @@ const ProblemSection = () => {
             transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-20 font-medium tracking-wide"
           >
-            <span className="text-gradient">Are You Experiencing</span>
+            <span className="text-cosmic-violet">Are You Experiencing</span>
             <br />
             <span className="text-foreground">Any of These?</span>
           </motion.h2>
@@ -82,7 +82,7 @@ const ProblemSection = () => {
             transition={{ duration: 1, delay: 1 }}
             className="text-center space-y-6"
           >
-            <p className="font-display text-3xl md:text-4xl text-gradient font-medium">
+            <p className="font-display text-3xl md:text-4xl text-cosmic-violet font-medium">
               You are not broken.
             </p>
             <p className="text-xl text-muted-foreground font-body italic">

@@ -38,16 +38,16 @@ const Navbar = () => {
           {/* Logo */}
           <motion.a 
             href="#" 
-            className="font-display text-xl md:text-2xl text-foreground tracking-wider flex items-center gap-3"
+            className="font-display text-lg md:text-xl text-foreground tracking-wider flex items-center gap-3"
             whileHover={{ scale: 1.05 }}
           >
             <motion.span
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="text-xl"
             >
               ✧
             </motion.span>
-            <span className="hidden sm:inline">Sacred Healing</span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -59,7 +59,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                className="font-body text-muted-foreground hover:text-foreground transition-colors duration-300 relative group tracking-wide"
+                className="font-body text-base md:text-lg text-foreground/90 hover:text-foreground transition-colors duration-300 relative group tracking-wide"
               >
                 {item.label}
                 <motion.span 
