@@ -9,86 +9,92 @@ interface CosmicBackgroundProps {
 const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: CosmicBackgroundProps) => {
   const intensityConfig = {
     light: { 
-      bgOpacity: 0.6,
-      flowerOpacity: 0.12,
-      starCount: 50
+      flowerOpacity: 0.08,
+      starCount: 120
     },
     medium: { 
-      bgOpacity: 0.75,
-      flowerOpacity: 0.15,
-      starCount: 70
+      flowerOpacity: 0.12,
+      starCount: 150
     },
     strong: { 
-      bgOpacity: 0.85,
-      flowerOpacity: 0.18,
-      starCount: 90
+      flowerOpacity: 0.15,
+      starCount: 180
     }
   };
 
   const config = intensityConfig[intensity];
   
-  // Generate stable star positions
+  // Generate stable star positions - matching screenshot style (small white dots)
   const stars = useMemo(() => {
     return [...Array(config.starCount)].map((_, i) => ({
       id: i,
-      left: `${(i * 17 + 7) % 100}%`,
-      top: `${(i * 23 + 11) % 100}%`,
-      size: i % 4 === 0 ? 2 : 1,
-      duration: 2 + (i % 4),
-      delay: (i % 6) * 0.4
+      left: `${(i * 17.3 + 7.1) % 100}%`,
+      top: `${(i * 23.7 + 11.3) % 100}%`,
+      size: i % 8 === 0 ? 2.5 : i % 3 === 0 ? 1.5 : 1,
+      opacity: i % 5 === 0 ? 0.9 : 0.6,
+      duration: 3 + (i % 5),
+      delay: (i % 8) * 0.3
     }));
   }, [config.starCount]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Soft violet-purple gradient matching hero banner */}
+      {/* Base gradient matching screenshot - soft violet to purple-pink */}
       <div 
         className="absolute inset-0"
         style={{
           background: `linear-gradient(
             180deg,
-            hsla(270, 30%, 25%, ${config.bgOpacity}) 0%,
-            hsla(280, 35%, 35%, ${config.bgOpacity * 0.9}) 25%,
-            hsla(260, 40%, 40%, ${config.bgOpacity * 0.8}) 50%,
-            hsla(275, 35%, 30%, ${config.bgOpacity * 0.85}) 75%,
-            hsla(270, 30%, 22%, ${config.bgOpacity}) 100%
+            hsl(260, 25%, 18%) 0%,
+            hsl(265, 28%, 25%) 20%,
+            hsl(270, 30%, 32%) 40%,
+            hsl(280, 25%, 38%) 60%,
+            hsl(290, 22%, 42%) 80%,
+            hsl(300, 20%, 45%) 100%
           )`
         }}
       />
       
-      {/* Aurora/Northern lights effect - soft pink and teal */}
-      <motion.div
-        animate={{ 
-          opacity: [0.15, 0.25, 0.15],
-          x: [-20, 20, -20]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 right-0 w-[60%] h-[70%]"
-        style={{
-          background: 'radial-gradient(ellipse at 70% 20%, hsla(320, 60%, 70%, 0.2) 0%, transparent 50%)',
-        }}
-      />
-      <motion.div
-        animate={{ 
-          opacity: [0.1, 0.2, 0.1],
-          x: [10, -10, 10]
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-        className="absolute top-0 left-1/4 w-[50%] h-[60%]"
-        style={{
-          background: 'radial-gradient(ellipse at 30% 30%, hsla(175, 50%, 60%, 0.15) 0%, transparent 50%)',
-        }}
-      />
-
-      {/* Soft cloud/mist layer at bottom */}
+      {/* Subtle pink aurora glow at top - matching screenshot */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-1/3"
+        className="absolute top-0 left-0 right-0 h-[40%]"
         style={{
-          background: 'linear-gradient(to top, hsla(30, 30%, 80%, 0.08) 0%, transparent 100%)',
+          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, hsla(320, 40%, 60%, 0.15) 0%, transparent 70%)',
+        }}
+      />
+      
+      {/* Secondary aurora - softer pink-violet */}
+      <motion.div
+        animate={{ 
+          opacity: [0.08, 0.15, 0.08],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 right-0 w-[70%] h-[50%]"
+        style={{
+          background: 'radial-gradient(ellipse at 70% 10%, hsla(300, 35%, 55%, 0.12) 0%, transparent 60%)',
+        }}
+      />
+      
+      {/* Bright star accent (like the one in the screenshot on the left) */}
+      <motion.div
+        animate={{ 
+          opacity: [0.6, 1, 0.6],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute"
+        style={{
+          left: '8%',
+          top: '15%',
+          width: 6,
+          height: 6,
+          backgroundColor: 'hsla(60, 30%, 95%, 0.95)',
+          borderRadius: '50%',
+          boxShadow: '0 0 15px 5px hsla(60, 40%, 90%, 0.5), 0 0 30px 10px hsla(60, 30%, 80%, 0.3)',
         }}
       />
 
-      {/* Twinkling stars */}
+      {/* Twinkling stars - small white dots matching screenshot */}
       <div className="absolute inset-0">
         {stars.map((star) => (
           <motion.div
@@ -99,11 +105,10 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
               top: star.top,
               width: star.size,
               height: star.size,
-              backgroundColor: 'hsla(0, 0%, 100%, 0.9)',
+              backgroundColor: `hsla(0, 0%, 100%, ${star.opacity})`,
             }}
             animate={{
-              opacity: [0.3, 0.9, 0.3],
-              scale: [0.8, 1.2, 0.8],
+              opacity: [star.opacity * 0.5, star.opacity, star.opacity * 0.5],
             }}
             transition={{
               duration: star.duration,
@@ -115,60 +120,69 @@ const CosmicBackground = ({ showFlowerOfLife = true, intensity = "medium" }: Cos
         ))}
       </div>
 
-      {/* Flower of Life - Sacred Geometry - centered and subtle */}
+      {/* Flower of Life - Sacred Geometry - centered and clearly visible */}
       {showFlowerOfLife && (
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.svg
-            width="800"
-            height="800"
-            viewBox="0 0 800 800"
-            className="w-[90vw] h-[90vw] max-w-[700px] max-h-[700px] md:max-w-[800px] md:max-h-[800px]"
+            width="900"
+            height="900"
+            viewBox="0 0 900 900"
+            className="w-[85vw] h-[85vw] max-w-[750px] max-h-[750px] md:max-w-[900px] md:max-h-[900px]"
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 300, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 400, repeat: Infinity, ease: "linear" }}
             style={{ opacity: config.flowerOpacity }}
           >
             {/* Central circle */}
-            <circle cx="400" cy="400" r="60" fill="none" stroke="hsla(45, 40%, 85%, 0.6)" strokeWidth="0.8" />
+            <circle cx="450" cy="450" r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.7)" strokeWidth="1" />
             
             {/* First ring of 6 circles */}
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
-              const x = 400 + 60 * Math.cos((angle * Math.PI) / 180);
-              const y = 400 + 60 * Math.sin((angle * Math.PI) / 180);
+              const x = 450 + 70 * Math.cos((angle * Math.PI) / 180);
+              const y = 450 + 70 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring1-${i}`} cx={x} cy={y} r="60" fill="none" stroke="hsla(45, 40%, 85%, 0.5)" strokeWidth="0.7" />
+                <circle key={`ring1-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.6)" strokeWidth="0.9" />
               );
             })}
             
             {/* Second ring of 12 circles */}
             {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => {
-              const x = 400 + 104 * Math.cos((angle * Math.PI) / 180);
-              const y = 400 + 104 * Math.sin((angle * Math.PI) / 180);
+              const x = 450 + 121 * Math.cos((angle * Math.PI) / 180);
+              const y = 450 + 121 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring2-${i}`} cx={x} cy={y} r="60" fill="none" stroke="hsla(45, 40%, 85%, 0.4)" strokeWidth="0.6" />
+                <circle key={`ring2-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.5)" strokeWidth="0.8" />
               );
             })}
             
             {/* Third ring of 18 circles */}
             {[0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340].map((angle, i) => {
-              const x = 400 + 160 * Math.cos((angle * Math.PI) / 180);
-              const y = 400 + 160 * Math.sin((angle * Math.PI) / 180);
+              const x = 450 + 180 * Math.cos((angle * Math.PI) / 180);
+              const y = 450 + 180 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring3-${i}`} cx={x} cy={y} r="60" fill="none" stroke="hsla(45, 40%, 85%, 0.3)" strokeWidth="0.5" />
+                <circle key={`ring3-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.4)" strokeWidth="0.7" />
               );
             })}
             
             {/* Fourth ring of 24 circles */}
             {Array.from({ length: 24 }, (_, i) => i * 15).map((angle, i) => {
-              const x = 400 + 220 * Math.cos((angle * Math.PI) / 180);
-              const y = 400 + 220 * Math.sin((angle * Math.PI) / 180);
+              const x = 450 + 250 * Math.cos((angle * Math.PI) / 180);
+              const y = 450 + 250 * Math.sin((angle * Math.PI) / 180);
               return (
-                <circle key={`ring4-${i}`} cx={x} cy={y} r="60" fill="none" stroke="hsla(45, 40%, 85%, 0.25)" strokeWidth="0.4" />
+                <circle key={`ring4-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.3)" strokeWidth="0.6" />
+              );
+            })}
+            
+            {/* Fifth ring of 30 circles */}
+            {Array.from({ length: 30 }, (_, i) => i * 12).map((angle, i) => {
+              const x = 450 + 320 * Math.cos((angle * Math.PI) / 180);
+              const y = 450 + 320 * Math.sin((angle * Math.PI) / 180);
+              return (
+                <circle key={`ring5-${i}`} cx={x} cy={y} r="70" fill="none" stroke="hsla(45, 50%, 80%, 0.25)" strokeWidth="0.5" />
               );
             })}
             
             {/* Outer boundary circles */}
-            <circle cx="400" cy="400" r="280" fill="none" stroke="hsla(45, 40%, 85%, 0.2)" strokeWidth="0.4" />
-            <circle cx="400" cy="400" r="340" fill="none" stroke="hsla(45, 40%, 85%, 0.15)" strokeWidth="0.3" />
+            <circle cx="450" cy="450" r="320" fill="none" stroke="hsla(45, 50%, 80%, 0.2)" strokeWidth="0.5" />
+            <circle cx="450" cy="450" r="390" fill="none" stroke="hsla(45, 50%, 80%, 0.15)" strokeWidth="0.4" />
           </motion.svg>
         </div>
       )}
