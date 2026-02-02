@@ -59,11 +59,19 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                className="font-body text-base md:text-lg text-foreground/90 hover:text-foreground transition-colors duration-300 relative group tracking-wide"
+                className={`font-body text-base md:text-lg transition-colors duration-300 relative group tracking-wide ${
+                  isScrolled 
+                    ? "text-foreground/90 hover:text-foreground" 
+                    : "text-white hover:text-white/80"
+                }`}
               >
                 {item.label}
                 <motion.span 
-                  className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cosmic-violet to-cosmic-turquoise group-hover:w-full transition-all duration-300"
+                  className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${
+                    isScrolled 
+                      ? "bg-gradient-to-r from-cosmic-violet to-cosmic-turquoise" 
+                      : "bg-white/60"
+                  }`}
                 />
               </motion.a>
             ))}
