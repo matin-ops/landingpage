@@ -102,7 +102,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
           >
-            <Button variant="hero" size="xl" asChild>
+            <Button variant="sacred" size="xl" asChild>
               <a href="#journey">Enter the Journey</a>
             </Button>
           </motion.div>
