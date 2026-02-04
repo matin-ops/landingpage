@@ -50,11 +50,24 @@ const HeroSection = () => {
           alt="Cosmic rainbow healing landscape" 
           className="w-full h-full object-cover"
         />
-        {/* Gradient overlay for text readability */}
+        {/* Gradient overlay - smooth transition to next section's pastel lavender */}
         <div className="absolute inset-0 bg-gradient-hero-overlay" />
         
-        {/* Additional cosmic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-cosmic-violet/10" />
+        {/* Additional smooth blend to pastel lilac of IntroSection */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(
+              180deg,
+              transparent 0%,
+              transparent 40%,
+              hsla(270, 40%, 92%, 0.3) 60%,
+              hsla(270, 40%, 92%, 0.6) 75%,
+              hsla(270, 40%, 92%, 0.9) 90%,
+              hsl(270, 40%, 92%) 100%
+            )`
+          }}
+        />
       </motion.div>
 
       {/* Floating cosmic particles */}
